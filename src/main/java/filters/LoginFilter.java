@@ -8,9 +8,12 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@WebFilter("/StudentProfile.jsp")
 public class LoginFilter implements Filter {
 
 	@Override
@@ -25,6 +28,12 @@ public class LoginFilter implements Filter {
 		
 		HttpServletRequest request2 = (HttpServletRequest)request;
 		HttpSession session =request2.getSession(); 
+		if(session.getAttribute("loggedInId") != null) {
+			chain.doFilter(request, response);
+		}
+		else {
+			((HttpServletResponse)response).sendRedirect("Login.jsp");
+		}
 			 
 	}
 
