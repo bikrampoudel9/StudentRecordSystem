@@ -20,12 +20,13 @@ public class Login extends HttpServlet {
 		
 		StudentDao sDao = new StudentDao();
 		boolean isValid =  sDao.checkLogin(id,password);
+		HttpSession session = request.getSession();
 		if(isValid == true) {
-			HttpSession session = request.getSession();
 			session.setAttribute("loggedInId",id);
 			response.sendRedirect("StudentProfile.jsp");
 		}
 		else {
+			session.setAttribute("loginError","Invalid id or password");
 			response.sendRedirect("Login.jsp");		
 		}
 		

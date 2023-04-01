@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h2>Hello id</h2>
+<h2>Hello <%= session.getAttribute("loggedInId") %></h2>
 <h1>This is student Profile.</h1>
 	
 </body>

@@ -12,9 +12,13 @@
 	 		<param-name>driver</param-name>
 	 		<param-value>com.mysql.cj.jdbc.Driver</param-value>
 	 	</init-param>
-	 	
 	 </servlet>
- 
+	 <!-- Servlet Context  -->
+	<context-param>
+		<param-name>imagePath</param-name>
+		<param-value>C:/Users/User/eclipse-workspace/StudentRecordSystem/src/main/webapp/images/</param-value>
+	</context-param> 
+ 	
   
   
 

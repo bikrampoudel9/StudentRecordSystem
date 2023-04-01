@@ -5,17 +5,19 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.Part;
 
 import databases.StudentDao;
 
 
 @SuppressWarnings("serial")
 @WebServlet("/registration")
+@MultipartConfig
 public class StudentRegistration extends HttpServlet {
 	public void service(HttpServletRequest request,HttpServletResponse response) throws  IOException, ServletException {
 		
@@ -25,6 +27,10 @@ public class StudentRegistration extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String password = request.getParameter("password");
 		
+		Part userImage = request.getPart("userImage");
+		String path = getServletContext().getInitParameter("imagePath");
+		userImage.write(path+"userImage/"+id+".png");
+		
 		System.out.println(id+name+gender+password);
 		
 		//response.sendRedirect("https://www.google.com/")
@@ -33,8 +39,8 @@ public class StudentRegistration extends HttpServlet {
 		
 
 		
-		StudentDao sdao = new StudentDao();
-		String message = sdao.registerStudent(id, name, gender, password);
+//		StudentDao sdao = new StudentDao();
+//		String message = sdao.registerStudent(id, name, gender, password);
 //		
 //		PrintWriter out = response.getWriter();
 // 		out.println("<h1>"+message+"</h1>");

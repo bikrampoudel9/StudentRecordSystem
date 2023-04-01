@@ -26,13 +26,13 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-		HttpServletRequest request2 = (HttpServletRequest)request;
-		HttpSession session =request2.getSession(); 
-		if(session.getAttribute("loggedInId") != null) {
-			chain.doFilter(request, response);
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		if(session.getAttribute("loggedInId") == null) {
+			session.setAttribute("loginError","Do login First!");
+			((HttpServletResponse)response).sendRedirect("Login.jsp");
 		}
 		else {
-			((HttpServletResponse)response).sendRedirect("Login.jsp");
+			chain.doFilter(request, response);
 		}
 			 
 	}

@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-	<form action="registration" method="get">
+	<form action="registration" method="post" enctype="multipart/form-data">
 		<div>
 			<label for="studentId">Student Id</label>
 			<input type="text" name="stdId" id="studentId"/>
@@ -36,6 +36,7 @@
 			<label for="pass">Password</label>
 			<input type="password" name="password" id="pass"/>
 		</div>
+				
 		<div>
 			<input type="submit"/>
 		</div>
