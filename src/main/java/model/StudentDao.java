@@ -1,4 +1,4 @@
-package databases;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,17 +18,18 @@ public class StudentDao {
 		return con;
 	}
 	
-	public String registerStudent(String id, String name, String gender, String pass) {
+	public String registerStudent(Student student) {
 		String message = "";
 		try {
 			
 			Connection con =  getConnection();
-			String query = "insert into registration values(?,?,?,?)";
+			String query = "insert into registration values(?,?,?,?,?)";
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setString(1,id);
-			pst.setString(2,name);
-			pst.setString(3,gender);
-			pst.setString(4,pass);
+			pst.setString(1,student.getId());
+			pst.setString(2,student.getName());
+			pst.setString(3,student.getGender());
+			pst.setString(4,student.getPassword());
+			pst.setString(5,student.getImagePath());
 			int rows = pst.executeUpdate();
 			if(rows >= 1) {
 				message = "Successfully Added";

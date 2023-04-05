@@ -1,21 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<style>
-	input[type=text], input[type=password]{
-		display:block;
-	}
-	form div{
-		margin:10px;
-	}
-	
-	
-</style>
 </head>
 <body>
-	<form action="registration" method="post" enctype="multipart/form-data">
+<form action="../registration" method="post" enctype="multipart/form-data">
 		<div>
 			<label for="studentId">Student Id</label>
 			<input type="text" name="stdId" id="studentId"/>
@@ -36,12 +28,14 @@
 			<label for="pass">Password</label>
 			<input type="password" name="password" id="pass"/>
 		</div>
-		
+		<div>
+			<input type="file" name="image"/>
+			
+		</div>
 				
 		<div>
 			<input type="submit"/>
 		</div>
 	</form>
-
 </body>
 </html>

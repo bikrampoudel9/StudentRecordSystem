@@ -1,4 +1,4 @@
-package servlets;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import databases.StudentDao;
+import model.AESEncryption;
+import model.Student;
+import model.StudentDao;
 
 
 @SuppressWarnings("serial")
@@ -21,32 +23,20 @@ import databases.StudentDao;
 public class StudentRegistration extends HttpServlet {
 	public void service(HttpServletRequest request,HttpServletResponse response) throws  IOException, ServletException {
 		
-		
 		String id = request.getParameter("stdId");
 		String name = request.getParameter("stdName");
 		String gender = request.getParameter("gender");
 		String password = request.getParameter("password");
+		String encryptedPassword = AESEncryption.encrypt(password);
+		String relativePath = "userImage/"+id+".png";
+		Student student = new Student(id,name,gender,encryptedPassword,relativePath);
+		new StudentDao().registerStudent(student);
 		
-		Part userImage = request.getPart("userImage");
-		String path = getServletContext().getInitParameter("imagePath");
-		userImage.write(path+"userImage/"+id+".png");
+		Part image = request.getPart("image");
+		String imagePath = getServletContext().getInitParameter("imagePath");
+		String fullPath = imagePath+relativePath;
+		image.write(fullPath);
 		
-		System.out.println(id+name+gender+password);
-		
-		//response.sendRedirect("https://www.google.com/")
-//		RequestDispatcher rd = request.getRequestDispatcher("anotherServlet");
-// 		rd.forward(request, response);
-		
-
-		
-//		StudentDao sdao = new StudentDao();
-//		String message = sdao.registerStudent(id, name, gender, password);
-//		
-//		PrintWriter out = response.getWriter();
-// 		out.println("<h1>"+message+"</h1>");
-// 		
-// 		response.setContentType("text/html");
- 		
 		
 	}
 }
