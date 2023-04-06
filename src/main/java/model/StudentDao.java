@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class StudentDao {
@@ -41,22 +42,25 @@ public class StudentDao {
 		}
 		return message;	
 	}
-	public ResultSet fetchStudentRecord(){
+	public ArrayList<Student> fetchStudentRecord(){
+		ArrayList<Student> studentList = new ArrayList<>();
+		Connection con = null;
 		try {
-			Connection con = getConnection();
+			con = getConnection();
 			String query = "select * from registration";
 			PreparedStatement st = con.prepareStatement(query);
-			ResultSet table = st.executeQuery();
-			con.close();
-			return table;		
-//			while(table.next()) {
-//				String id = table.getString(1);
-//				String name = table.getString(2);
-//				String gender = table.getString(3);
-//				String password = table.getString(4);
-//				
-//				System.out.println(id+" "+name+" "+gender+" "+password);
-//			}
+			ResultSet table = st.executeQuery();	
+			while(table.next()) {
+				String id = table.getString(1);
+				String name = table.getString(2);
+				String gender = table.getString(3);
+				String password = table.getString(4);
+				String imagePath = table.getString(5);
+				
+				Student student = new Student(id, name, gender, password, imagePath);
+				studentList.add(student);	
+			}
+			
 			
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -64,7 +68,16 @@ public class StudentDao {
 			e.printStackTrace();
 			
 		}
-		return null;				
+		finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return studentList;				
 	}
 	
 	public boolean checkLogin(String id, String password) {

@@ -29,13 +29,18 @@ public class StudentRegistration extends HttpServlet {
 		String password = request.getParameter("password");
 		String encryptedPassword = AESEncryption.encrypt(password);
 		String relativePath = "userImage/"+id+".png";
-		Student student = new Student(id,name,gender,encryptedPassword,relativePath);
-		new StudentDao().registerStudent(student);
 		
-		Part image = request.getPart("image");
-		String imagePath = getServletContext().getInitParameter("imagePath");
-		String fullPath = imagePath+relativePath;
-		image.write(fullPath);
+		Student st = new Student(id,name,gender,encryptedPassword,relativePath);
+		
+		StudentDao studentDao = new StudentDao();
+		String message = studentDao.registerStudent(st);	
+		if(message.equals("Successfully Added")) {
+			Part image = request.getPart("image");
+			String imagePath = getServletContext().getInitParameter("imagePath");
+			String fullPath = imagePath+relativePath;
+			image.write(fullPath);
+		}
+		
 		
 		
 	}

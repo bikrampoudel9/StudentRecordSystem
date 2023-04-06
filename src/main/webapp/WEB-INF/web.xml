@@ -15,10 +15,11 @@
 	 </servlet>
 	 
 	 <!-- Servlet Context  -->
-	 <context-param>
-	 	<param-name>imagePath</param-name>
-	 	<param-value>C:/Users/User/eclipse-workspace/StudentRecordSystem/src/main/webapp/images/</param-value>
-	 </context-param>
+	<context-param>
+		<param-name>imagePath</param-name>
+		<param-value>C:/Users/User/eclipse-workspace/StudentRecordSystem/src/main/webapp/images/</param-value>
+	</context-param>
+	
  	
   
   

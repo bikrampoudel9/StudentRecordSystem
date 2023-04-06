@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="../registration" method="post" enctype="multipart/form-data">
+	<form action="../registration" method="post" enctype="multipart/form-data" >
 		<div>
 			<label for="studentId">Student Id</label>
 			<input type="text" name="stdId" id="studentId"/>
@@ -28,11 +28,11 @@
 			<label for="pass">Password</label>
 			<input type="password" name="password" id="pass"/>
 		</div>
+		
 		<div>
-			<input type="file" name="image"/>
-			
+			<input type="file" name="image">
 		</div>
-				
+		
 		<div>
 			<input type="submit"/>
 		</div>
