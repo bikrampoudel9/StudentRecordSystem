@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Image;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -29,17 +30,27 @@ public class StudentRegistration extends HttpServlet {
 		String password = request.getParameter("password");
 		String encryptedPassword = AESEncryption.encrypt(password);
 		String relativePath = "userImage/"+id+".png";
+	
+		Student student = new Student(id,name,gender,encryptedPassword,relativePath);
+		StudentDao sDao = new StudentDao();
+		String message =  sDao.registerStudent(student);
 		
-		Student st = new Student(id,name,gender,encryptedPassword,relativePath);
-		
-		StudentDao studentDao = new StudentDao();
-		String message = studentDao.registerStudent(st);	
 		if(message.equals("Successfully Added")) {
 			Part image = request.getPart("image");
 			String imagePath = getServletContext().getInitParameter("imagePath");
 			String fullPath = imagePath+relativePath;
 			image.write(fullPath);
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

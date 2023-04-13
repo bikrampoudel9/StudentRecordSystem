@@ -12,7 +12,7 @@
 	<%-- <%
 		Students st = new Students();
 	%> --%>
-	<jsp:useBean id="st" class="model.Students" scope="page"/>
+	<jsp:useBean id="st" class="model.Student" scope="page"/>
 	<%-- <%
 		st.setName("Ram");	
 	%> --%>

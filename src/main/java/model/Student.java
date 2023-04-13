@@ -7,7 +7,6 @@ public class Student {
 	private String password;
 	private String imagePath;
 	public Student(String id, String name, String gender, String password, String imagePath) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
@@ -44,6 +43,11 @@ public class Student {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+	
+	
+	
+	
+	
 	
 	
 }

@@ -49,7 +49,7 @@ public class StudentDao {
 			con = getConnection();
 			String query = "select * from registration";
 			PreparedStatement st = con.prepareStatement(query);
-			ResultSet table = st.executeQuery();	
+			ResultSet table = st.executeQuery();
 			while(table.next()) {
 				String id = table.getString(1);
 				String name = table.getString(2);
@@ -57,8 +57,8 @@ public class StudentDao {
 				String password = table.getString(4);
 				String imagePath = table.getString(5);
 				
-				Student student = new Student(id, name, gender, password, imagePath);
-				studentList.add(student);	
+				Student student = new Student(id,name,gender,password,imagePath);
+				studentList.add(student);		
 			}
 			
 			
@@ -75,9 +75,11 @@ public class StudentDao {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
+		return studentList;
 		
-		return studentList;				
+					
 	}
 	
 	public boolean checkLogin(String id, String password) {
@@ -100,6 +102,43 @@ public class StudentDao {
 			e.printStackTrace();
 		}
 		return isValid;
+		
+	}
+	
+	public Student getStudentRecordById(String id) {
+		Connection con = null;
+		Student student = null;
+		try {
+			con = getConnection();
+			String query = "select * from registration where id=?";
+			PreparedStatement st = con.prepareStatement(query);
+			st.setString(1,id);
+			ResultSet table = st.executeQuery();
+			while(table.next()) {
+				String id2 = table.getString(1);
+				String name = table.getString(2);
+				String gender = table.getString(3);
+				String password = table.getString(4);
+				String imagePath = table.getString(5);
+				
+				student = new Student(id,name,gender,password,imagePath);
+						
+			}			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return student;
 		
 	}
 	
