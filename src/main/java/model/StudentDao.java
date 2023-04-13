@@ -119,9 +119,10 @@ public class StudentDao {
 				String name = table.getString(2);
 				String gender = table.getString(3);
 				String password = table.getString(4);
+				String decryptedPassword = AESEncryption.decrypt(password);
 				String imagePath = table.getString(5);
 				
-				student = new Student(id,name,gender,password,imagePath);
+				student = new Student(id,name,gender,decryptedPassword,imagePath);
 						
 			}			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -140,6 +141,31 @@ public class StudentDao {
 		}
 		return student;
 		
+	}
+	
+	public String updateStudent(Student student) {
+		String message = "";
+		try {
+			
+			Connection con =  getConnection();
+			String query = "UPDATE registration SET name=?, gender=?,password=?,image_path=? where id=?";
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.setString(1,student.getName());
+			pst.setString(2,student.getGender());
+			pst.setString(3,student.getPassword());
+			pst.setString(4,student.getImagePath());
+			pst.setString(5,student.getId());
+
+			int rows = pst.executeUpdate();
+			if(rows >= 1) {
+				message = "Successfully Registered";
+			}
+			con.close();	
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+			message = e.getMessage();
+		}
+		return message;	
 	}
 	
 	

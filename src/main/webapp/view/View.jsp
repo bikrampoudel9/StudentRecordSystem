@@ -24,7 +24,7 @@
 				<td>${st.gender}</td>
 				<td>${st.password}</td>
 				<td><img src="images/${st.imagePath}" height="100px" width="100px"></td>
-				<td></td>
+				<td><a href="${pageContext.request.contextPath}/editStudent?id=${st.id}">Edit</a> <a href="">Delete</a></td>
 			</tr>	
 		</c:forEach>
 	
