@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+ <%@page import="java.util.Date" %>  
+ 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<c:set var="time" value="<%=new Date().getTime()%>"/>
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Gender</th>
+			<th>Password</th>
+			<th>Image</th>
+		</tr>
+		<c:forEach var="st" items="${stList}">
+			<tr>
+				<td><c:out value="${st.id}"/></td>
+				<td>${st.name}</td>
+				<td>${st.gender}</td>
+				<td>${st.password}</td>
+				<td><img src="images/${st.imagePath}?v=${time}" height="100px" width="100px"></td>
+				<td><a href="${pageContext.request.contextPath}/editStudent?id=${st.id}">Edit</a>
+					<a onclick="" href="${pageContext.request.contextPath}/deleteStudent?id=${st.id}">Delete</a></td>
+			</tr>	
+		</c:forEach>
+	
+	</table>
+</body>
+</html>

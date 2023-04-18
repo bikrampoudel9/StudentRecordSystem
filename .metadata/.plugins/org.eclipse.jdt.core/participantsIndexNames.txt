@@ -1,5 +1,0 @@
-INDEX VERSION 1.131
-D:\Eclipse\L2C6\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1994007368.index
-\StudentRecordSystem\src\main\java
-D:\Eclipse\L2C6\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3339181195.index
-\StudentRecordSystem\src\main\java
