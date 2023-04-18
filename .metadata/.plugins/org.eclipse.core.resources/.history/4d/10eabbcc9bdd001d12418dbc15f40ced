@@ -1,0 +1,5 @@
+package controller.delete;
+
+public class DeleteStudent extends HttpServlet{
+
+}
